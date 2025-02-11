@@ -2,54 +2,60 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Adivina Quién (Versión con Botón de Secreto)</title>
-  <style>
-    /* Estilos mínimos para ver todo claro */
-    body { font-family: sans-serif; margin: 20px; }
-    .hidden { display: none; }
-    #gameBoard img {
-      width: 80px;
-      height: 80px;
-      object-fit: cover;
-      margin: 5px;
-      cursor: pointer;
-      opacity: 1;
-      transition: opacity 0.3s;
-    }
-    #gameBoard img.fade { opacity: 0.3; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adivina Quién - Mostrar Secreto al Hacer Click</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Encabezado con gradiente -->
+  <header>
+    <h1>Adivina Quién</h1>
+  </header>
 
-  <h1>Adivina Quién (Offline)</h1>
-  
-  <!-- Botón para abrir menú de categorías -->
-  <button id="openCategoryBtn">Elegir Categoría</button>
-  
-  <!-- Menú de categorías, oculto al inicio -->
-  <div id="categoryMenu" class="hidden">
-    <h3>Seleccione una categoría:</h3>
-    <button class="category-btn" data-category="jugadores">Jugadores de Fútbol</button>
-    <button class="category-btn" data-category="clubes">Clubes de Fútbol</button>
-  </div>
-  
-  <!-- Texto con la categoría elegida -->
-  <h2 id="selectedCategory"></h2>
-  
-  <!-- Botón para mostrar el objeto secreto -->
-  <button id="showSecretBtn" class="hidden">
-    Mostrar objeto secreto
-  </button>
-  
-  <!-- Aquí se mostrará la imagen secreta cuando toques el botón -->
-  <div id="secretContainer" class="hidden">
-    <h3>El objeto secreto es:</h3>
-    <img id="secretImage" alt="Secreto" style="width:100px; height:100px; object-fit:cover;">
+  <!-- Contenedor principal -->
+  <div class="container">
+
+    <!-- Botón para abrir el menú de categorías -->
+    <button id="openCategoryBtn" class="primary-btn">Elegir Categoría</button>
+
+    <!-- Menú de categorías (oculto con .hidden) -->
+    <div id="categoryMenu" class="hidden category-menu">
+      <h2>Elige una categoría</h2>
+      <button class="category-btn primary-btn" data-category="jugadores-futbol">
+        Jugadores de Fútbol
+      </button>
+      <button class="category-btn primary-btn" data-category="clubes-futbol">
+        Clubes de Fútbol
+      </button>
+    </div>
+
+    <!-- Muestra la categoría seleccionada -->
+    <h2 id="selectedCategory"></h2>
+
+    <!-- Botón que muestra el objeto secreto al hacer click -->
+    <div id="showSecretContainer" class="hidden">
+      <button id="showSecretBtn" class="primary-btn">
+        Mostrar objeto secreto
+      </button>
+    </div>
+
+    <!-- Contenedor que revela la imagen secreta cuando tocas el botón -->
+    <div id="secretContainer" class="hidden secret-container">
+      <h3>El objeto secreto es:</h3>
+      <img id="secretImage" alt="Objeto Secreto" class="secret-image">
+    </div>
+
+    <!-- Grid de imágenes (20 por categoría) -->
+    <div id="gameBoard" class="game-board"></div>
+
   </div>
 
-  <!-- Tablero con las 20 imágenes -->
-  <div id="gameBoard"></div>
-  
+  <!-- Footer -->
+  <footer>
+    <p>Versión offline, sin servidor</p>
+  </footer>
+
+  <!-- Script principal -->
   <script src="script.js"></script>
 </body>
 </html>
