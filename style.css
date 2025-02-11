@@ -33,7 +33,7 @@ header h1 {
   max-width: 800px;
   margin: 20px auto;
   text-align: center;
-  flex-grow: 1; /* Para ocupar el espacio y empujar el footer al final */
+  flex-grow: 1; 
 }
 
 /* Footer */
@@ -56,8 +56,8 @@ footer {
   margin-bottom: 10px;
 }
 
-/* Botones genéricos */
-.primary-btn, .danger-btn {
+/* Botones */
+.primary-btn, .secondary-btn {
   display: inline-block;
   padding: 12px 18px;
   margin: 5px;
@@ -74,37 +74,65 @@ footer {
 .primary-btn:hover {
   background-color: #1976d2;
 }
-.danger-btn {
-  background-color: #e53935;
+.secondary-btn {
+  background-color: #757575;
   color: #fff;
 }
-.danger-btn:hover {
-  background-color: #c62828;
+.secondary-btn:hover {
+  background-color: #616161;
 }
 
-/* Ocultar elementos con la clase .hidden */
+/* Ocultar elementos con .hidden */
 .hidden {
   display: none;
 }
 
-/* Título de la categoría seleccionada */
+/* Título de categoría seleccionada */
 #selectedCategory {
   font-size: 1.4em;
   margin-top: 15px;
   color: #444;
 }
 
-/* Game board: contenedor de imágenes */
+/* Contenedor secreto */
+.secret-container {
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  margin: 10px auto;
+  padding: 15px;
+  width: 80%;
+  max-width: 400px;
+}
+.secret-container p {
+  font-size: 1.2em;
+  margin: 5px;
+}
+.secret-name {
+  font-weight: bold;
+  color: #e53935;
+  font-size: 1.4em;
+}
+/* Si quieres mostrar la imagen secreta:
+.secret-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+*/
+
+/* Game board: grid para 20 imágenes */
 .game-board {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  /* Esto crea tantas columnas de ~100px de ancho como quepan */
   gap: 15px;
   margin-top: 20px;
-  justify-items: center; /* Centra las imágenes en cada columna */
+  justify-items: center;
 }
 
-/* Estilos para las imágenes */
+/* Estilos de cada imagen */
 .game-image {
   width: 90px;
   height: 90px;
@@ -118,53 +146,25 @@ footer {
   transform: scale(1.05);
 }
 .game-image.fade {
-  opacity: 0.3; /* se atenúa */
+  opacity: 0.3;
   transform: scale(0.95);
 }
 
-/* Botón "Arriesgar" */
-#arriesgarContainer {
+/* Botón reset container */
+#resetContainer {
   margin-top: 20px;
 }
 
-/* Caja de resultados */
-.result-box {
-  background-color: #fff;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
-  margin-top: 20px;
-  animation: fadeIn 0.5s;
-}
-.result-box p {
-  font-size: 1.2em;
-  margin-bottom: 10px;
-}
-
-/* Animación para el resultContainer */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Adaptación para pantallas pequeñas */
+/* Responsive */
 @media (max-width: 600px) {
   .game-image {
     width: 70px;
     height: 70px;
   }
-  .primary-btn, .danger-btn {
+  .primary-btn, .secondary-btn {
     width: 100%;
     font-size: 1em;
     margin: 8px 0;
   }
-  .category-menu {
-    text-align: center;
-  }
 }
+
