@@ -10,7 +10,7 @@ const gameBoard = document.getElementById('gameBoard');
 // 2) Datos de ejemplo: 20 URLs por categoría
 //    Reemplaza estas URLs con las tuyas (assets/images/...). 
 const categoriesData = {
-  'jugadores': [
+  'jugadores-futbol': [
     'https://picsum.photos/seed/jug1/200/200',
     'https://picsum.photos/seed/jug2/200/200',
     'https://picsum.photos/seed/jug3/200/200',
@@ -32,7 +32,7 @@ const categoriesData = {
     'https://picsum.photos/seed/jug19/200/200',
     'https://picsum.photos/seed/jug20/200/200'
   ],
-  'clubes': [
+  'clubes-futbol': [
     'https://picsum.photos/seed/club1/200/200',
     'https://picsum.photos/seed/club2/200/200',
     'https://picsum.photos/seed/club3/200/200',
