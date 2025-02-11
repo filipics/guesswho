@@ -1,14 +1,19 @@
-// 1) Referencias a elementos
+/***********************************************
+ * 1) Referencias a elementos HTML
+ ***********************************************/
 const openCategoryBtn = document.getElementById('openCategoryBtn');
 const categoryMenu = document.getElementById('categoryMenu');
 const selectedCategoryElem = document.getElementById('selectedCategory');
+const showSecretContainer = document.getElementById('showSecretContainer');
 const showSecretBtn = document.getElementById('showSecretBtn');
 const secretContainer = document.getElementById('secretContainer');
 const secretImage = document.getElementById('secretImage');
 const gameBoard = document.getElementById('gameBoard');
 
-// 2) Datos de ejemplo: 20 URLs por categoría
-//    Reemplaza estas URLs con las tuyas (assets/images/...). 
+/***********************************************
+ * 2) Datos de ejemplo: 20 imágenes en 2 categorías
+ *    (Reemplaza estos links con tus imágenes reales)
+ ***********************************************/
 const categoriesData = {
   'jugadores-futbol': [
     'https://picsum.photos/seed/jug1/200/200',
@@ -56,72 +61,83 @@ const categoriesData = {
   ]
 };
 
-// 3) Variables
-let secretImgSrc = null; // Ruta de la imagen secreta elegida al azar
+/***********************************************
+ * 3) Variables
+ ***********************************************/
+let secretImgSrc = null; // Aquí guardaremos la ruta de la imagen secreta
 
-// 4) Botón "Elegir Categoría"
+/***********************************************
+ * 4) Botón "Elegir Categoría"
+ ***********************************************/
 openCategoryBtn.addEventListener('click', () => {
   categoryMenu.classList.toggle('hidden');
 });
 
-// 5) Al hacer clic en un botón de categoría
-const categoryBtns = document.querySelectorAll('.category-btn');
-categoryBtns.forEach(btn => {
+/***********************************************
+ * 5) Botones de categoría
+ ***********************************************/
+const categoryButtons = document.querySelectorAll('.category-btn');
+categoryButtons.forEach(btn => {
   btn.addEventListener('click', () => {
-    // Ocultar menú
+    // Oculta el menú de categorías
     categoryMenu.classList.add('hidden');
 
-    // Tomar el nombre de la categoría
-    const category = btn.dataset.category;
-    selectedCategoryElem.textContent = `Categoría: ${category}`;
+    // Toma la categoría seleccionada
+    const cat = btn.dataset.category;
+    selectedCategoryElem.textContent = `Categoría: ${cat}`;
 
-    // Cargar las 20 imágenes
-    loadCategoryImages(category);
+    // Carga las 20 imágenes y elige 1 como secreta
+    loadCategoryImages(cat);
 
-    // Mostrar el botón "Mostrar objeto secreto"
-    showSecretBtn.classList.remove('hidden');
-
-    // Al ocultar la imagen secreta, si se mostró antes
+    // Muestra el botón para revelar el secreto
+    showSecretContainer.classList.remove('hidden');
+    // Oculta (si estuviera visible) el contenedor del secreto
     secretContainer.classList.add('hidden');
     secretImage.src = ''; 
   });
 });
 
-// 6) Función para cargar las 20 imágenes en el board
-function loadCategoryImages(cat) {
-  gameBoard.innerHTML = ''; // limpio
+/***********************************************
+ * 6) Función para cargar las imágenes en el board
+ ***********************************************/
+function loadCategoryImages(category) {
+  gameBoard.innerHTML = ''; // Limpia el contenido previo
   
-  // cojo la lista de la categoría
-  const imgs = categoriesData[cat];
+  // Toma las rutas
+  const images = categoriesData[category];
 
-  // Elijo 1 imagen aleatoria como secreta
-  secretImgSrc = pickRandomImage(imgs);
+  // Selecciona 1 imagen aleatoria como secreta
+  secretImgSrc = pickRandom(images);
 
-  // Muestro las 20 en el board
-  imgs.forEach(src => {
-    const imgElem = document.createElement('img');
-    imgElem.src = src;
-    // Permitir fade al hacer clic
-    imgElem.addEventListener('click', () => {
-      imgElem.classList.toggle('fade');
+  // Crea elementos <img> en el gameBoard
+  images.forEach(src => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.classList.add('game-image');
+
+    // Al hacer click, fade
+    img.addEventListener('click', () => {
+      img.classList.toggle('fade');
     });
-    gameBoard.appendChild(imgElem);
+
+    gameBoard.appendChild(img);
   });
 }
 
-// 7) Función aleatoria
-function pickRandomImage(array) {
-  const i = Math.floor(Math.random() * array.length);
-  return array[i];
+/***********************************************
+ * 7) Función para elegir un item al azar
+ ***********************************************/
+function pickRandom(arr) {
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex];
 }
 
-// 8) Botón "Mostrar objeto secreto"
+/***********************************************
+ * 8) Botón "Mostrar objeto secreto"
+ ***********************************************/
 showSecretBtn.addEventListener('click', () => {
-  // Poner la ruta aleatoria en la imagen
+  // Asigna la ruta secreta a <img id="secretImage">
   secretImage.src = secretImgSrc;
-
-  // Mostrar contenedor
+  // Muestra el contenedor
   secretContainer.classList.remove('hidden');
 });
-
-// (No hay botón "arriesgar" ni nada más)
