@@ -1,4 +1,6 @@
-// 1) Referencias a elementos HTML
+/************************************
+ * 1) Referencias a elementos HTML
+ ************************************/
 const openCategoryBtn = document.getElementById('openCategoryBtn');
 const categoryMenu = document.getElementById('categoryMenu');
 const selectedCategoryElem = document.getElementById('selectedCategory');
@@ -9,136 +11,185 @@ const resultContainer = document.getElementById('resultContainer');
 const resultMessage = document.getElementById('resultMessage');
 const resetBtn = document.getElementById('resetBtn');
 
-// 2) Datos de ejemplo: categorías y sus imágenes
-//    (En la práctica, podrías cargar esto desde un archivo JSON o similar)
+/************************************
+ * 2) Datos de ejemplo: categorías y sus 20 imágenes
+ *    Reemplaza las URLs de ejemplo con tus propias imágenes
+ ************************************/
 const categoriesData = {
   'jugadores-futbol': [
-    'assets/images/jugadores-futbol/jugador1.png',
-    'assets/images/jugadores-futbol/jugador2.png',
-    // ... y así hasta los 20 (o más)
+    'https://picsum.photos/seed/jug1/200/200',
+    'https://picsum.photos/seed/jug2/200/200',
+    'https://picsum.photos/seed/jug3/200/200',
+    'https://picsum.photos/seed/jug4/200/200',
+    'https://picsum.photos/seed/jug5/200/200',
+    'https://picsum.photos/seed/jug6/200/200',
+    'https://picsum.photos/seed/jug7/200/200',
+    'https://picsum.photos/seed/jug8/200/200',
+    'https://picsum.photos/seed/jug9/200/200',
+    'https://picsum.photos/seed/jug10/200/200',
+    'https://picsum.photos/seed/jug11/200/200',
+    'https://picsum.photos/seed/jug12/200/200',
+    'https://picsum.photos/seed/jug13/200/200',
+    'https://picsum.photos/seed/jug14/200/200',
+    'https://picsum.photos/seed/jug15/200/200',
+    'https://picsum.photos/seed/jug16/200/200',
+    'https://picsum.photos/seed/jug17/200/200',
+    'https://picsum.photos/seed/jug18/200/200',
+    'https://picsum.photos/seed/jug19/200/200',
+    'https://picsum.photos/seed/jug20/200/200'
   ],
   'clubes-futbol': [
-    'assets/images/clubes-futbol/club1.png',
-    'assets/images/clubes-futbol/club2.png',
-    // ...
+    'https://picsum.photos/seed/club1/200/200',
+    'https://picsum.photos/seed/club2/200/200',
+    'https://picsum.photos/seed/club3/200/200',
+    'https://picsum.photos/seed/club4/200/200',
+    'https://picsum.photos/seed/club5/200/200',
+    'https://picsum.photos/seed/club6/200/200',
+    'https://picsum.photos/seed/club7/200/200',
+    'https://picsum.photos/seed/club8/200/200',
+    'https://picsum.photos/seed/club9/200/200',
+    'https://picsum.photos/seed/club10/200/200',
+    'https://picsum.photos/seed/club11/200/200',
+    'https://picsum.photos/seed/club12/200/200',
+    'https://picsum.photos/seed/club13/200/200',
+    'https://picsum.photos/seed/club14/200/200',
+    'https://picsum.photos/seed/club15/200/200',
+    'https://picsum.photos/seed/club16/200/200',
+    'https://picsum.photos/seed/club17/200/200',
+    'https://picsum.photos/seed/club18/200/200',
+    'https://picsum.photos/seed/club19/200/200',
+    'https://picsum.photos/seed/club20/200/200'
   ]
-  // ... más categorías
 };
 
-// 3) Variables de estado
-let currentCategory = null;
-let secretImage = null; // guardaremos la ruta de la imagen secreta
-let imagesList = [];    // las rutas de las imágenes de la categoría actual
+/************************************
+ * 3) Variables de estado
+ ************************************/
+let currentCategory = null; 
+let secretImage = null; 
+let imagesList = [];
 
-// 4) Mostrar/ocultar el menú de categorías
+/************************************
+ * 4) Mostrar/ocultar menú categorías
+ ************************************/
 openCategoryBtn.addEventListener('click', () => {
+  // Alterna la visibilidad del menú
   categoryMenu.classList.toggle('hidden');
 });
 
-// 5) Detectar click en los botones de categoría
+/************************************
+ * 5) Detectar click en cada botón de categoría
+ ************************************/
 const categoryButtons = document.querySelectorAll('.category-btn');
 categoryButtons.forEach(btn => {
   btn.addEventListener('click', () => {
-    // 1. Oculte el menú de categorías
+    // Ocultar menú
     categoryMenu.classList.add('hidden');
 
-    // 2. Identificar la categoría elegida
+    // Capturar la categoría elegida
     currentCategory = btn.dataset.category;
     selectedCategoryElem.textContent = `Categoría: ${currentCategory}`;
 
-    // 3. Cargar imágenes en el grid
+    // Cargar las 20 imágenes en el tablero
     loadCategoryImages(currentCategory);
 
-    // 4. Mostrar el botón de arriesgar
+    // Mostrar el botón "Arriesgar"
     arriesgarContainer.classList.remove('hidden');
 
-    // 5. Reiniciar el contenedor de resultados (por si jugamos más de una vez)
+    // Ocultar contenedor de resultados por si está visible
     resultContainer.classList.add('hidden');
     resultMessage.textContent = '';
   });
 });
 
-// 6) Función para cargar imágenes en el #gameBoard
+/************************************
+ * 6) Función para cargar imágenes
+ ************************************/
 function loadCategoryImages(category) {
-  // Limpiar el tablero primero
+  // Limpia el tablero
   gameBoard.innerHTML = '';
 
+  // Obtiene la lista de rutas según la categoría
   imagesList = categoriesData[category];
 
-  // Seleccionar aleatoriamente la "secreta"
+  // Selecciona aleatoriamente la imagen secreta
   secretImage = pickRandomImage(imagesList);
 
-  // Crear elementos <img> para cada ruta
+  // Genera los elementos <img>
   imagesList.forEach((imgSrc, index) => {
     const imgElem = document.createElement('img');
     imgElem.src = imgSrc;
     imgElem.classList.add('game-image');
-    imgElem.dataset.index = index; // para identificarla si hace falta
+    imgElem.dataset.index = index; 
 
-    // Al hacer click, togglear "fade"
+    // Evento: si clickeas (antes de arriesgar) hace fade
     imgElem.addEventListener('click', () => {
       imgElem.classList.toggle('fade');
     });
 
+    // Agrega cada imagen al tablero
     gameBoard.appendChild(imgElem);
   });
 }
 
-// 7) Función para obtener una imagen aleatoria
+/************************************
+ * 7) Función para elegir una imagen aleatoria
+ ************************************/
 function pickRandomImage(array) {
   const randomIndex = Math.floor(Math.random() * array.length);
   return array[randomIndex];
 }
 
-// 8) Botón "Arriesgar"
+/************************************
+ * 8) Lógica del botón "Arriesgar"
+ ************************************/
 arriesgarBtn.addEventListener('click', () => {
-  // Al arriesgar, el usuario debe "elegir" una imagen de la parrilla
-  // Podemos implementar que, al tocar arriesgar, entremos en un modo "selección final"
-  // Para hacerlo simple: al arriesgar, pedimos que el usuario haga click en la imagen que cree
-  // que es la correcta.
-  
-  // Desactivamos el resto de interacciones (ej: no más fades)
+  // Bloquea el fade en todas las imágenes
   const allImages = gameBoard.querySelectorAll('.game-image');
   allImages.forEach(img => {
-    // Removemos eventListener de fade
     img.replaceWith(img.cloneNode(true));
   });
 
-  // Agregamos un listener especial para "adivinar"
+  // Nuevas referencias sin los listeners previos
   const newAllImages = gameBoard.querySelectorAll('.game-image');
   newAllImages.forEach(img => {
+    // Al hacer click ahora, manejaremos la adivinanza final
     img.addEventListener('click', handleFinalGuess);
   });
 
-  // Podemos mostrar un mensaje al usuario: "Haz click en la imagen que crees que es el secreto"
-  alert('Toca la imagen que crees que es la respuesta.');
+  alert('Toca la imagen que crees que es la respuesta secreta.');
 });
 
-// 9) Función que maneja el click final al arriesgar
+/************************************
+ * 9) Función handleFinalGuess
+ ************************************/
 function handleFinalGuess(event) {
   const chosenImg = event.target;
   const chosenSrc = chosenImg.src;
 
-  // Comparamos con la imagen secreta
+  // Compara la imagen elegida con la secreta
+  // Usamos includes() pero podrías usar === si ambos caminos son idénticos
   if (chosenSrc.includes(secretImage)) {
     resultMessage.textContent = '¡Acertaste! Era la imagen secreta.';
   } else {
     resultMessage.textContent = 'Lo siento, esa no era la correcta.';
   }
 
-  // Mostramos el resultContainer
+  // Muestra el contenedor con el resultado
   resultContainer.classList.remove('hidden');
 
-  // Desactivamos más clics en todas las imágenes
+  // Desactiva más clicks
   const allImages = gameBoard.querySelectorAll('.game-image');
   allImages.forEach(img => {
-    img.replaceWith(img.cloneNode(true)); // elimina todos los event listeners
+    img.replaceWith(img.cloneNode(true));
   });
 }
 
-// 10) Botón "Jugar de nuevo"
+/************************************
+ * 10) Botón "Jugar de nuevo"
+ ************************************/
 resetBtn.addEventListener('click', () => {
-  // Reiniciamos todo a estado inicial (ocultar result, quitar imágenes, etc.)
+  // Resetea estado y vista
   resultContainer.classList.add('hidden');
   gameBoard.innerHTML = '';
   selectedCategoryElem.textContent = '';
