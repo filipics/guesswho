@@ -21,11 +21,7 @@ header {
   background: linear-gradient(45deg, #2196f3, #21cbf3);
   color: #fff;
 }
-header h1 {
-  font-size: 2em;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
+header h1 { font-size: 2em; }
 
 /* Contenedor principal */
 .container {
@@ -33,7 +29,7 @@ header h1 {
   max-width: 800px;
   margin: 20px auto;
   text-align: center;
-  flex-grow: 1; 
+  flex-grow: 1;
 }
 
 /* Footer */
@@ -52,9 +48,7 @@ footer {
   margin: 15px 0;
   padding: 15px;
 }
-.category-menu h2 {
-  margin-bottom: 10px;
-}
+.category-menu h2 { margin-bottom: 10px; }
 
 /* Botones */
 .primary-btn {
@@ -69,23 +63,19 @@ footer {
   background-color: #2196f3;
   color: #fff;
 }
-.primary-btn:hover {
-  background-color: #1976d2;
-}
+.primary-btn:hover { background-color: #1976d2; }
 
-/* Ocultar elementos con .hidden */
-.hidden {
-  display: none;
-}
+/* Ocultar con .hidden */
+.hidden { display: none; }
 
-/* Título de la categoría seleccionada */
+/* Categoría elegida */
 #selectedCategory {
   font-size: 1.4em;
   margin-top: 15px;
   color: #444;
 }
 
-/* Contenedor que revela la imagen secreta */
+/* Contenedor secreto */
 .secret-container {
   background-color: #fff;
   border: 2px solid #ddd;
@@ -99,13 +89,7 @@ footer {
   width: 120px;
   height: 120px;
   object-fit: cover;
-  display: block;
-  margin: 10px auto 0 auto;
-}
-
-/* Contenedor del botón "Mostrar objeto secreto" */
-#showSecretContainer {
-  margin: 20px;
+  margin-top: 10px;
 }
 
 /* Grid de imágenes */
@@ -116,8 +100,6 @@ footer {
   margin-top: 20px;
   justify-items: center;
 }
-
-/* Estilos de cada imagen */
 .game-image {
   width: 90px;
   height: 90px;
@@ -127,15 +109,13 @@ footer {
   cursor: pointer;
   transition: transform 0.3s, opacity 0.3s;
 }
-.game-image:hover {
-  transform: scale(1.05);
-}
+.game-image:hover { transform: scale(1.05); }
 .game-image.fade {
   opacity: 0.3;
   transform: scale(0.95);
 }
 
-/* Responsive para móvil */
+/* Responsive */
 @media (max-width: 600px) {
   .game-image {
     width: 70px;
@@ -143,6 +123,7 @@ footer {
   }
   .primary-btn {
     width: 100%;
+    margin: 8px 0;
     font-size: 1em;
   }
 }
