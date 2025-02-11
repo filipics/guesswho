@@ -1,5 +1,5 @@
 /***********************************************
- * 1) Referencias a elementos HTML
+ * 1) Referencias a elementos
  ***********************************************/
 const openCategoryBtn = document.getElementById('openCategoryBtn');
 const categoryMenu = document.getElementById('categoryMenu');
@@ -14,58 +14,36 @@ const secretImage = document.getElementById('secretImage');
 const gameBoard = document.getElementById('gameBoard');
 
 /***********************************************
- * 2) Datos: 2 categorías, 20 imágenes cada una
- *    Reemplaza estos links por tus rutas reales (assets/images/...)
+ * 2) Datos: solo una categoría ("jugadores-futbol") 
+ *    con 20 imágenes en la carpeta /jugadores
  ***********************************************/
 const categoriesData = {
   'jugadores-futbol': [
-    'https://picsum.photos/seed/jug1/200/200',
-    'https://picsum.photos/seed/jug2/200/200',
-    'https://picsum.photos/seed/jug3/200/200',
-    'https://picsum.photos/seed/jug4/200/200',
-    'https://picsum.photos/seed/jug5/200/200',
-    'https://picsum.photos/seed/jug6/200/200',
-    'https://picsum.photos/seed/jug7/200/200',
-    'https://picsum.photos/seed/jug8/200/200',
-    'https://picsum.photos/seed/jug9/200/200',
-    'https://picsum.photos/seed/jug10/200/200',
-    'https://picsum.photos/seed/jug11/200/200',
-    'https://picsum.photos/seed/jug12/200/200',
-    'https://picsum.photos/seed/jug13/200/200',
-    'https://picsum.photos/seed/jug14/200/200',
-    'https://picsum.photos/seed/jug15/200/200',
-    'https://picsum.photos/seed/jug16/200/200',
-    'https://picsum.photos/seed/jug17/200/200',
-    'https://picsum.photos/seed/jug18/200/200',
-    'https://picsum.photos/seed/jug19/200/200',
-    'https://picsum.photos/seed/jug20/200/200'
-  ],
-  'clubes-futbol': [
-    'https://picsum.photos/seed/club1/200/200',
-    'https://picsum.photos/seed/club2/200/200',
-    'https://picsum.photos/seed/club3/200/200',
-    'https://picsum.photos/seed/club4/200/200',
-    'https://picsum.photos/seed/club5/200/200',
-    'https://picsum.photos/seed/club6/200/200',
-    'https://picsum.photos/seed/club7/200/200',
-    'https://picsum.photos/seed/club8/200/200',
-    'https://picsum.photos/seed/club9/200/200',
-    'https://picsum.photos/seed/club10/200/200',
-    'https://picsum.photos/seed/club11/200/200',
-    'https://picsum.photos/seed/club12/200/200',
-    'https://picsum.photos/seed/club13/200/200',
-    'https://picsum.photos/seed/club14/200/200',
-    'https://picsum.photos/seed/club15/200/200',
-    'https://picsum.photos/seed/club16/200/200',
-    'https://picsum.photos/seed/club17/200/200',
-    'https://picsum.photos/seed/club18/200/200',
-    'https://picsum.photos/seed/club19/200/200',
-    'https://picsum.photos/seed/club20/200/200'
+    'jugadores/jugador1.png',
+    'jugadores/jugador2.png',
+    'jugadores/jugador3.png',
+    'jugadores/jugador4.png',
+    'jugadores/jugador5.png',
+    'jugadores/jugador6.png',
+    'jugadores/jugador7.png',
+    'jugadores/jugador8.png',
+    'jugadores/jugador9.png',
+    'jugadores/jugador10.png',
+    'jugadores/jugador11.png',
+    'jugadores/jugador12.png',
+    'jugadores/jugador13.png',
+    'jugadores/jugador14.png',
+    'jugadores/jugador15.png',
+    'jugadores/jugador16.png',
+    'jugadores/jugador17.png',
+    'jugadores/jugador18.png',
+    'jugadores/jugador19.png',
+    'jugadores/jugador20.png'
   ]
 };
 
 /***********************************************
- * 3) Variables
+ * 3) Variables de estado
  ***********************************************/
 let currentCategory = null;
 let secretImgSrc = null; // Ruta de la imagen secreta
@@ -78,7 +56,7 @@ openCategoryBtn.addEventListener('click', () => {
 });
 
 /***********************************************
- * 5) Escuchar los botones de categoría
+ * 5) Botón de categoría
  ***********************************************/
 const categoryButtons = document.querySelectorAll('.category-btn');
 categoryButtons.forEach(btn => {
@@ -95,31 +73,31 @@ categoryButtons.forEach(btn => {
     // Muestra los botones (Objeto Secreto, Reiniciar)
     actionButtons.classList.remove('hidden');
 
-    // Oculta el contenedor del secreto (por si estuvo visible antes)
+    // Oculta el contenedor del secreto (por si estuviera visible)
     secretContainer.classList.add('hidden');
     secretImage.src = "";
   });
 });
 
 /***********************************************
- * 6) Función para cargar imágenes
+ * 6) Carga de imágenes
  ***********************************************/
 function loadCategoryImages(category) {
   gameBoard.innerHTML = "";
 
-  // Lista de 20 imágenes
+  // Tomamos la lista local
   const images = categoriesData[category];
 
-  // Escoge 1 al azar como "secret"
+  // Escoge 1 al azar
   secretImgSrc = pickRandom(images);
 
-  // Agrego las 20 al board
+  // Crea las 20 imágenes en el tablero
   images.forEach(src => {
     const imgElem = document.createElement('img');
-    imgElem.src = src;
+    imgElem.src = src;  // <-- ruta local, ej: 'jugadores/jugador3.png'
     imgElem.classList.add('game-image');
 
-    // Permite fade al clic
+    // Fade al click
     imgElem.addEventListener('click', () => {
       imgElem.classList.toggle('fade');
     });
@@ -129,7 +107,7 @@ function loadCategoryImages(category) {
 }
 
 /***********************************************
- * 7) Función para elegir un item al azar
+ * 7) Elección aleatoria
  ***********************************************/
 function pickRandom(arr) {
   const i = Math.floor(Math.random() * arr.length);
@@ -137,13 +115,10 @@ function pickRandom(arr) {
 }
 
 /***********************************************
- * 8) Botón "Objeto Secreto" (mostrar/ocultar)
+ * 8) Botón "Objeto Secreto" (toggle mostrar/ocultar)
  ***********************************************/
 showSecretBtn.addEventListener('click', () => {
-  // Asigna la ruta a <img>
   secretImage.src = secretImgSrc;
-
-  // Toggle del contenedor
   secretContainer.classList.toggle('hidden');
 });
 
@@ -151,10 +126,7 @@ showSecretBtn.addEventListener('click', () => {
  * 9) Botón "Reiniciar" (misma categoría)
  ***********************************************/
 reiniciarBtn.addEventListener('click', () => {
-  // Carga de nuevo la misma categoría
   loadCategoryImages(currentCategory);
-
-  // Oculta el contenedor secreto
   secretContainer.classList.add('hidden');
   secretImage.src = "";
 });
