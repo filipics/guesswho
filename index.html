@@ -3,61 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adivina Quién - Con Botón Secreto y Reiniciar</title>
+  <title>Adivina Quién - Imágenes locales</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Encabezado con gradiente -->
   <header>
     <h1>Adivina Quién</h1>
   </header>
 
-  <!-- Contenedor principal -->
   <div class="container">
     <!-- Botón para abrir el menú de categorías -->
     <button id="openCategoryBtn" class="primary-btn">Elegir Categoría</button>
 
-    <!-- Menú de categorías (oculto con .hidden) -->
+    <!-- Menú de categorías -->
     <div id="categoryMenu" class="hidden category-menu">
       <h2>Elige una categoría</h2>
+      <!-- Sólo un botón de ejemplo: jugadores-futbol -->
       <button class="category-btn primary-btn" data-category="jugadores-futbol">
         Jugadores de Fútbol
       </button>
-      <button class="category-btn primary-btn" data-category="clubes-futbol">
-        Clubes de Fútbol
-      </button>
     </div>
 
-    <!-- Categoría elegida -->
+    <!-- Nombre de la categoría elegida -->
     <h2 id="selectedCategory"></h2>
 
-    <!-- Botones para Objeto Secreto y Reiniciar -->
+    <!-- Botones: Objeto secreto, Reiniciar -->
     <div id="actionButtons" class="hidden">
-      <button id="showSecretBtn" class="primary-btn">
-        Objeto Secreto
-      </button>
-      <button id="reiniciarBtn" class="primary-btn">
-        Reiniciar
-      </button>
+      <button id="showSecretBtn" class="primary-btn">Objeto Secreto</button>
+      <button id="reiniciarBtn" class="primary-btn">Reiniciar</button>
     </div>
 
-    <!-- Contenedor que muestra la imagen secreta -->
+    <!-- Contenedor del objeto secreto -->
     <div id="secretContainer" class="hidden secret-container">
       <h3>El objeto secreto es:</h3>
       <img id="secretImage" alt="Objeto Secreto" class="secret-image">
     </div>
 
-    <!-- Tablero de imágenes (grid) -->
+    <!-- Tablero con las 20 imágenes -->
     <div id="gameBoard" class="game-board"></div>
-
   </div>
 
-  <!-- Footer -->
   <footer>
-    <p>Versión offline, sin servidor</p>
+    <p>Versión offline con imágenes locales</p>
   </footer>
 
-  <!-- Script principal -->
   <script src="script.js"></script>
 </body>
 </html>
