@@ -1,66 +1,170 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 10px;
-  text-align: center;
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #f0f8ff, #cce3f5);
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Encabezado */
+header {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(45deg, #2196f3, #21cbf3);
+  color: #fff;
+}
+header h1 {
+  font-size: 2em;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* Contenedor principal */
+.container {
+  width: 90%;
+  max-width: 800px;
+  margin: 20px auto;
+  text-align: center;
+  flex-grow: 1; /* Para ocupar el espacio y empujar el footer al final */
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  background-color: #f2f2f2;
+  padding: 10px;
+  color: #666;
+}
+
+/* Menú de categorías */
+.category-menu {
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  margin: 15px 0;
+  padding: 15px;
+}
+.category-menu h2 {
+  margin-bottom: 10px;
+}
+
+/* Botones genéricos */
+.primary-btn, .danger-btn {
+  display: inline-block;
+  padding: 12px 18px;
+  margin: 5px;
+  border-radius: 6px;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.primary-btn {
+  background-color: #2196f3;
+  color: #fff;
+}
+.primary-btn:hover {
+  background-color: #1976d2;
+}
+.danger-btn {
+  background-color: #e53935;
+  color: #fff;
+}
+.danger-btn:hover {
+  background-color: #c62828;
+}
+
+/* Ocultar elementos con la clase .hidden */
 .hidden {
   display: none;
 }
 
-#categoryMenu {
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  padding: 10px;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
+/* Título de la categoría seleccionada */
+#selectedCategory {
+  font-size: 1.4em;
+  margin-top: 15px;
+  color: #444;
 }
 
-.category-btn {
-  background-color: #2196F3;
-  color: #fff;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 4px;
-}
-
-#gameBoard {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
+/* Game board: contenedor de imágenes */
+.game-board {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  /* Esto crea tantas columnas de ~100px de ancho como quepan */
+  gap: 15px;
   margin-top: 20px;
+  justify-items: center; /* Centra las imágenes en cada columna */
 }
 
+/* Estilos para las imágenes */
 .game-image {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   object-fit: cover;
-  transition: opacity 0.5s;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
   cursor: pointer;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  transition: transform 0.3s, opacity 0.3s;
 }
-
+.game-image:hover {
+  transform: scale(1.05);
+}
 .game-image.fade {
-  opacity: 0.3;
+  opacity: 0.3; /* se atenúa */
+  transform: scale(0.95);
 }
 
+/* Botón "Arriesgar" */
 #arriesgarContainer {
   margin-top: 20px;
 }
 
-#resultContainer {
+/* Caja de resultados */
+.result-box {
+  background-color: #fff;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
   margin-top: 20px;
+  animation: fadeIn 0.5s;
+}
+.result-box p {
+  font-size: 1.2em;
+  margin-bottom: 10px;
 }
 
-#resetBtn {
-  margin-top: 10px;
-  padding: 8px 12px;
-  background-color: #4CAF50;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
+/* Animación para el resultContainer */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Adaptación para pantallas pequeñas */
+@media (max-width: 600px) {
+  .game-image {
+    width: 70px;
+    height: 70px;
+  }
+  .primary-btn, .danger-btn {
+    width: 100%;
+    font-size: 1em;
+    margin: 8px 0;
+  }
+  .category-menu {
+    text-align: center;
+  }
 }
