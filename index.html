@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adivina Quién - Mostrar Secreto al Hacer Click</title>
+  <title>Adivina Quién - Con Botón Secreto y Reiniciar</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -14,7 +14,6 @@
 
   <!-- Contenedor principal -->
   <div class="container">
-
     <!-- Botón para abrir el menú de categorías -->
     <button id="openCategoryBtn" class="primary-btn">Elegir Categoría</button>
 
@@ -29,33 +28,12 @@
       </button>
     </div>
 
-    <!-- Muestra la categoría seleccionada -->
+    <!-- Categoría elegida -->
     <h2 id="selectedCategory"></h2>
 
-    <!-- Botón que muestra el objeto secreto al hacer click -->
-    <div id="showSecretContainer" class="hidden">
+    <!-- Botones para Objeto Secreto y Reiniciar -->
+    <div id="actionButtons" class="hidden">
       <button id="showSecretBtn" class="primary-btn">
-        Mostrar objeto secreto
+        Objeto Secreto
       </button>
-    </div>
-
-    <!-- Contenedor que revela la imagen secreta cuando tocas el botón -->
-    <div id="secretContainer" class="hidden secret-container">
-      <h3>El objeto secreto es:</h3>
-      <img id="secretImage" alt="Objeto Secreto" class="secret-image">
-    </div>
-
-    <!-- Grid de imágenes (20 por categoría) -->
-    <div id="gameBoard" class="game-board"></div>
-
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <p>Versión offline, sin servidor</p>
-  </footer>
-
-  <!-- Script principal -->
-  <script src="script.js"></script>
-</body>
-</html>
+      <button id="reiniciarBtn"
