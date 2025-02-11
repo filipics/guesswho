@@ -14,7 +14,6 @@ body {
   flex-direction: column;
 }
 
-/* Encabezado */
 header {
   text-align: center;
   padding: 20px;
@@ -23,7 +22,6 @@ header {
 }
 header h1 { font-size: 2em; }
 
-/* Contenedor principal */
 .container {
   width: 90%;
   max-width: 800px;
@@ -32,7 +30,6 @@ header h1 { font-size: 2em; }
   flex-grow: 1;
 }
 
-/* Footer */
 footer {
   text-align: center;
   background-color: #f2f2f2;
@@ -65,7 +62,7 @@ footer {
 }
 .primary-btn:hover { background-color: #1976d2; }
 
-/* Ocultar con .hidden */
+/* Ocultar elementos con .hidden */
 .hidden { display: none; }
 
 /* Categoría elegida */
@@ -75,7 +72,7 @@ footer {
   color: #444;
 }
 
-/* Contenedor secreto */
+/* Contenedor del objeto secreto */
 .secret-container {
   background-color: #fff;
   border: 2px solid #ddd;
@@ -92,7 +89,7 @@ footer {
   margin-top: 10px;
 }
 
-/* Grid de imágenes */
+/* Tablero de imágenes */
 .game-board {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
@@ -114,17 +111,3 @@ footer {
   opacity: 0.3;
   transform: scale(0.95);
 }
-
-/* Responsive */
-@media (max-width: 600px) {
-  .game-image {
-    width: 70px;
-    height: 70px;
-  }
-  .primary-btn {
-    width: 100%;
-    margin: 8px 0;
-    font-size: 1em;
-  }
-}
-
