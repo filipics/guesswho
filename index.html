@@ -1,21 +1,43 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wordle sin Servidor</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adivina Quién Offline</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <h1>Wordle</h1>
-    <button id="toggle-history" class="button">Ver Historial</button>
-    <button onclick="resetGame()" class="button">Reiniciar</button>
-    <button id="modeToggle" class="button">Modo Diario</button>
-      <div id="history" style="display: none;"></div>  <!-- Oculto por defecto -->
-    <p id="message"></p>
-    <div id="grid"></div>
-    <p id="reveal-word"></p>
-    <div id="keyboard"></div>
-        <script src="script.js"></script>
+  <h1>Mi Adivina Quién</h1>
+
+  <!-- Botón para abrir menú de categorías -->
+  <button id="openCategoryBtn">Elegir Categoría</button>
+  
+  <!-- Contenedor que aparece al tocar el botón de categorías -->
+  <div id="categoryMenu" class="hidden">
+    <h2>Elige una categoría</h2>
+    <button class="category-btn" data-category="jugadores-futbol">Jugadores de Fútbol</button>
+    <button class="category-btn" data-category="clubes-futbol">Clubes de Fútbol</button>
+    <!-- ... más botones según tus categorías ... -->
+  </div>
+
+  <!-- Mostramos el nombre de la categoría seleccionada -->
+  <h2 id="selectedCategory"></h2>
+
+  <!-- Contenedor del juego (las imágenes) -->
+  <div id="gameBoard"></div>
+
+  <!-- Botón para arriesgar (visible una vez seleccionada la categoría) -->
+  <div id="arriesgarContainer" class="hidden">
+    <button id="arriesgarBtn">¡Arriesgar!</button>
+  </div>
+
+  <!-- Mensaje de resultado cuando arriesgas -->
+  <div id="resultContainer" class="hidden">
+    <p id="resultMessage"></p>
+    <button id="resetBtn">Jugar de nuevo</button>
+  </div>
+
+  <!-- Script principal -->
+  <script src="script.js"></script>
 </body>
 </html>
