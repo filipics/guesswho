@@ -1,24 +1,16 @@
-/**********************************************
- * 1) Referencias a elementos HTML
- **********************************************/
+// 1) Referencias a elementos
 const openCategoryBtn = document.getElementById('openCategoryBtn');
 const categoryMenu = document.getElementById('categoryMenu');
 const selectedCategoryElem = document.getElementById('selectedCategory');
+const showSecretBtn = document.getElementById('showSecretBtn');
 const secretContainer = document.getElementById('secretContainer');
-const secretName = document.getElementById('secretName');
-// const secretImage = document.getElementById('secretImage'); // si quieres mostrar la foto secreta
+const secretImage = document.getElementById('secretImage');
 const gameBoard = document.getElementById('gameBoard');
-const resetContainer = document.getElementById('resetContainer');
-const resetBtn = document.getElementById('resetBtn');
 
-/**********************************************
- * 2) Datos de ejemplo (20 imágenes por categoría)
- *    Si quieres mostrar "nombres" distintos, cambia la estructura a { name, src } 
- *    y asocia el 'name' y la ruta 'src' a cada imagen.
- **********************************************/
+// 2) Datos de ejemplo: 20 URLs por categoría
+//    Reemplaza estas URLs con las tuyas (assets/images/...). 
 const categoriesData = {
-  'jugadores-futbol': [
-    // Para el ejemplo, uso URLs de picsum.photos
+  'jugadores': [
     'https://picsum.photos/seed/jug1/200/200',
     'https://picsum.photos/seed/jug2/200/200',
     'https://picsum.photos/seed/jug3/200/200',
@@ -40,7 +32,7 @@ const categoriesData = {
     'https://picsum.photos/seed/jug19/200/200',
     'https://picsum.photos/seed/jug20/200/200'
   ],
-  'clubes-futbol': [
+  'clubes': [
     'https://picsum.photos/seed/club1/200/200',
     'https://picsum.photos/seed/club2/200/200',
     'https://picsum.photos/seed/club3/200/200',
@@ -64,102 +56,72 @@ const categoriesData = {
   ]
 };
 
-/**********************************************
- * 3) Variables de estado
- **********************************************/
-let currentCategory = null;
-let secretImgSrc = null; // ruta de la imagen secreta
-let imagesList = [];
+// 3) Variables
+let secretImgSrc = null; // Ruta de la imagen secreta elegida al azar
 
-/**********************************************
- * 4) Botón para mostrar/ocultar el menú de categorías
- **********************************************/
+// 4) Botón "Elegir Categoría"
 openCategoryBtn.addEventListener('click', () => {
   categoryMenu.classList.toggle('hidden');
 });
 
-/**********************************************
- * 5) Configurar el evento de cada botón de categoría
- **********************************************/
-const categoryButtons = document.querySelectorAll('.category-btn');
-categoryButtons.forEach(btn => {
+// 5) Al hacer clic en un botón de categoría
+const categoryBtns = document.querySelectorAll('.category-btn');
+categoryBtns.forEach(btn => {
   btn.addEventListener('click', () => {
-    // Oculta el menú
+    // Ocultar menú
     categoryMenu.classList.add('hidden');
-    resetContainer.classList.remove('hidden'); // mostramos el botón "Elegir otra categoría"
 
-    // Toma la categoría
-    currentCategory = btn.dataset.category;
-    selectedCategoryElem.textContent = `Categoría: ${currentCategory}`;
+    // Tomar el nombre de la categoría
+    const category = btn.dataset.category;
+    selectedCategoryElem.textContent = `Categoría: ${category}`;
 
-    // Carga las 20 imágenes en el tablero
-    loadCategoryImages(currentCategory);
+    // Cargar las 20 imágenes
+    loadCategoryImages(category);
 
-    // Muestra el contenedor del secreto
-    secretContainer.classList.remove('hidden');
+    // Mostrar el botón "Mostrar objeto secreto"
+    showSecretBtn.classList.remove('hidden');
+
+    // Al ocultar la imagen secreta, si se mostró antes
+    secretContainer.classList.add('hidden');
+    secretImage.src = ''; 
   });
 });
 
-/**********************************************
- * 6) Función para cargar y mostrar las 20 imágenes
- **********************************************/
-function loadCategoryImages(category) {
-  // Limpia el tablero
-  gameBoard.innerHTML = '';
+// 6) Función para cargar las 20 imágenes en el board
+function loadCategoryImages(cat) {
+  gameBoard.innerHTML = ''; // limpio
+  
+  // cojo la lista de la categoría
+  const imgs = categoriesData[cat];
 
-  // Obtén la lista de rutas según la categoría
-  imagesList = categoriesData[category];
+  // Elijo 1 imagen aleatoria como secreta
+  secretImgSrc = pickRandomImage(imgs);
 
-  // Selecciona 1 imagen aleatoria como la secreta
-  secretImgSrc = pickRandomImage(imagesList);
-
-  // Muestra el nombre de la imagen secreta
-  // En un juego real, quizás quieras un "nombre" asociado a esa imagen,
-  // pero aquí solo mostramos la ruta de forma simplificada
-  secretName.textContent = secretImgSrc;
-
-  // Si quieres mostrar la imagen secreta, descomenta:
-  // secretImage.src = secretImgSrc;
-
-  // Crea cada <img> en el DOM
-  imagesList.forEach((imgSrc) => {
+  // Muestro las 20 en el board
+  imgs.forEach(src => {
     const imgElem = document.createElement('img');
-    imgElem.src = imgSrc;
-    imgElem.classList.add('game-image');
-
-    // Permite hacer fade (descartar)
+    imgElem.src = src;
+    // Permitir fade al hacer clic
     imgElem.addEventListener('click', () => {
       imgElem.classList.toggle('fade');
     });
-
-    // Añadimos la imagen al tablero
     gameBoard.appendChild(imgElem);
   });
 }
 
-/**********************************************
- * 7) Función para seleccionar un elemento al azar
- **********************************************/
+// 7) Función aleatoria
 function pickRandomImage(array) {
-  const randomIndex = Math.floor(Math.random() * array.length);
-  return array[randomIndex];
+  const i = Math.floor(Math.random() * array.length);
+  return array[i];
 }
 
-/**********************************************
- * 8) Botón "Elegir otra categoría" (reset parcial)
- **********************************************/
-resetBtn.addEventListener('click', () => {
-  // Volver al estado inicial
-  selectedCategoryElem.textContent = '';
-  secretContainer.classList.add('hidden');
-  secretName.textContent = '';
-  // secretImage.src = ''; // si mostrabas la imagen secreta
-  gameBoard.innerHTML = '';
-  categoryMenu.classList.remove('hidden');
-  resetContainer.classList.add('hidden');
+// 8) Botón "Mostrar objeto secreto"
+showSecretBtn.addEventListener('click', () => {
+  // Poner la ruta aleatoria en la imagen
+  secretImage.src = secretImgSrc;
 
-  // Variables en null
-  currentCategory = null;
-  secretImgSrc = null;
-  imagesList = [];
+  // Mostrar contenedor
+  secretContainer.classList.remove('hidden');
 });
+
+// (No hay botón "arriesgar" ni nada más)
