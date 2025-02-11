@@ -1,4 +1,4 @@
-/* Reset básico */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
@@ -57,7 +57,7 @@ footer {
 }
 
 /* Botones */
-.primary-btn, .secondary-btn {
+.primary-btn {
   display: inline-block;
   padding: 12px 18px;
   margin: 5px;
@@ -66,20 +66,11 @@ footer {
   font-size: 1em;
   cursor: pointer;
   transition: background-color 0.3s;
-}
-.primary-btn {
   background-color: #2196f3;
   color: #fff;
 }
 .primary-btn:hover {
   background-color: #1976d2;
-}
-.secondary-btn {
-  background-color: #757575;
-  color: #fff;
-}
-.secondary-btn:hover {
-  background-color: #616161;
 }
 
 /* Ocultar elementos con .hidden */
@@ -87,46 +78,40 @@ footer {
   display: none;
 }
 
-/* Título de categoría seleccionada */
+/* Título de la categoría seleccionada */
 #selectedCategory {
   font-size: 1.4em;
   margin-top: 15px;
   color: #444;
 }
 
-/* Contenedor secreto */
+/* Contenedor que revela la imagen secreta */
 .secret-container {
   background-color: #fff;
   border: 2px solid #ddd;
   border-radius: 8px;
-  margin: 10px auto;
+  margin: 15px auto;
   padding: 15px;
   width: 80%;
   max-width: 400px;
 }
-.secret-container p {
-  font-size: 1.2em;
-  margin: 5px;
-}
-.secret-name {
-  font-weight: bold;
-  color: #e53935;
-  font-size: 1.4em;
-}
-/* Si quieres mostrar la imagen secreta:
 .secret-image {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   object-fit: cover;
   display: block;
-  margin: 0 auto;
+  margin: 10px auto 0 auto;
 }
-*/
 
-/* Game board: grid para 20 imágenes */
+/* Contenedor del botón "Mostrar objeto secreto" */
+#showSecretContainer {
+  margin: 20px;
+}
+
+/* Grid de imágenes */
 .game-board {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
   gap: 15px;
   margin-top: 20px;
   justify-items: center;
@@ -150,21 +135,14 @@ footer {
   transform: scale(0.95);
 }
 
-/* Botón reset container */
-#resetContainer {
-  margin-top: 20px;
-}
-
-/* Responsive */
+/* Responsive para móvil */
 @media (max-width: 600px) {
   .game-image {
     width: 70px;
     height: 70px;
   }
-  .primary-btn, .secondary-btn {
+  .primary-btn {
     width: 100%;
     font-size: 1em;
-    margin: 8px 0;
   }
 }
-
